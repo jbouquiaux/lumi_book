@@ -16,37 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -69,6 +72,7 @@
     <link rel="prev" title="Automatazing the ab-initio \(\Delta\)SCF procedure ; the LumiWork workflow" href="lesson_lumiwork.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -84,19 +88,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -104,7 +97,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -112,8 +104,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -129,7 +121,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -144,6 +137,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="../intro.html">
   
@@ -157,21 +152,17 @@
     
     
     <img src="../_static/lumi.png" class="logo__image only-light" alt="Lumi Book - Home"/>
-    <script>document.write(`<img src="../_static/lumi.png" class="logo__image only-dark" alt="Lumi Book - Home"/>`);</script>
+    <img src="../_static/lumi.png" class="logo__image only-dark pst-js-only" alt="Lumi Book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -233,9 +224,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -375,27 +366,19 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -437,7 +420,7 @@ document.write(`
 For this analysis, we use the <span class="math notranslate nohighlight">\(\Delta\)</span>SCF computations shown in the previous tutorial to instantiate a <code class="docutils literal notranslate"><span class="pre">DeltaSCF</span></code> object :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abipy.lumi.deltaSCF</span> <span class="kn">import</span> <span class="n">DeltaSCF</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abipy.lumi.deltaSCF</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeltaSCF</span>
 <span class="n">scf_files</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;flow_deltaSCF/w0/t2/outdata/out_GSR.nc&quot;</span><span class="p">,</span>
            <span class="s2">&quot;flow_deltaSCF/w0/t3/outdata/out_GSR.nc&quot;</span><span class="p">,</span>
            <span class="s2">&quot;flow_deltaSCF/w0/t4/outdata/out_GSR.nc&quot;</span><span class="p">,</span>
@@ -479,7 +462,7 @@ For this analysis, we use the <span class="math notranslate nohighlight">\(\Delt
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/32f41c5925186b8681a65b12c2ed27e270ef3a67ac51de8dc2d523b75c7e03e2.png" src="../_images/32f41c5925186b8681a65b12c2ed27e270ef3a67ac51de8dc2d523b75c7e03e2.png" />
+<img alt="../_images/f0397ea4c7a064e2dd9e9f4bc4f48a1e261f15305662eb99f604986bad8f5722.png" src="../_images/f0397ea4c7a064e2dd9e9f4bc4f48a1e261f15305662eb99f604986bad8f5722.png" />
 </div>
 </div>
 <p>In the ground state, notice the 7 Eu<span class="math notranslate nohighlight">\(_{4f}\)</span> states located in the gap. In the excited state (simulated with constrained occupation, as shown with the (un)filled markers), the created 4f hole lowers the energy of an occupied 5d state, which is now located at the top of the gap. The 6 remaining occupied 4f states are pushed down in the VB. If you have computed the four band structures associated to each point, you can use <code class="docutils literal notranslate"><span class="pre">results.plot_four_BandStructures(nscf_files)</span></code> where <code class="docutils literal notranslate"><span class="pre">nscf_files</span></code> is the list of four band structures .nc files.</p>
@@ -494,7 +477,7 @@ For this analysis, we use the <span class="math notranslate nohighlight">\(\Delt
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/eff43edc7941a47281f6e5957b2d7af0ab7223bef7139ea9653196468dfa151b.png" src="../_images/eff43edc7941a47281f6e5957b2d7af0ab7223bef7139ea9653196468dfa151b.png" />
+<img alt="../_images/97a2f131d43b37e0ad45ffba553b7512fded97dfca0c55244a22e1cca03db424.png" src="../_images/97a2f131d43b37e0ad45ffba553b7512fded97dfca0c55244a22e1cca03db424.png" />
 </div>
 </div>
 <p>Notice the strong dispersion of the bands close the CB bottom due to an interaction between Eu<span class="math notranslate nohighlight">\(_{5d}\)</span> replica. Increasing the supercell size reduces this dispersion.</p>
@@ -519,42 +502,42 @@ Lattice
       B : 0.0 7.959000000054767 0.0
       C : 0.0 0.0 6.368000000202725
     pbc : True True True
-PeriodicSite: Eu (3.9795, 0.0000, 1.5920) [0.5000, 0.0000, 0.2500]
-PeriodicSite: Sr (3.9795, 0.0000, 4.7760) [0.5000, 0.0000, 0.7500]
-PeriodicSite: Sr (-0.0000, 3.9795, 0.0008) [-0.0000, 0.5000, 0.0001]
-PeriodicSite: Sr (-0.0000, 3.9795, 3.1832) [-0.0000, 0.5000, 0.4999]
-PeriodicSite: Li (1.0143, 6.5691, 1.5920) [0.1274, 0.8254, 0.2500]
-PeriodicSite: Li (1.0112, 6.5664, 4.7760) [0.1270, 0.8250, 0.7500]
-PeriodicSite: Li (6.9447, 1.3899, 1.5920) [0.8726, 0.1746, 0.2500]
-PeriodicSite: Li (6.9478, 1.3926, 4.7760) [0.8730, 0.1750, 0.7500]
-PeriodicSite: Li (1.3928, 1.0131, 0.0018) [0.1750, 0.1273, 0.0003]
-PeriodicSite: Li (1.3928, 1.0131, 3.1822) [0.1750, 0.1273, 0.4997]
-PeriodicSite: Li (6.5662, 6.9459, 0.0018) [0.8250, 0.8727, 0.0003]
-PeriodicSite: Li (6.5662, 6.9459, 3.1822) [0.8250, 0.8727, 0.4997]
-PeriodicSite: Al (2.7995, 5.4314, 0.0014) [0.3517, 0.6824, 0.0002]
-PeriodicSite: Al (2.7995, 5.4314, 3.1826) [0.3517, 0.6824, 0.4998]
-PeriodicSite: Al (5.1595, 2.5276, 0.0014) [0.6483, 0.3176, 0.0002]
-PeriodicSite: Al (5.1595, 2.5276, 3.1826) [0.6483, 0.3176, 0.4998]
-PeriodicSite: Al (2.5294, 2.7943, 1.5920) [0.3178, 0.3511, 0.2500]
-PeriodicSite: Al (2.5292, 2.7979, 4.7760) [0.3178, 0.3515, 0.7500]
-PeriodicSite: Al (5.4296, 5.1647, 1.5920) [0.6822, 0.6489, 0.2500]
-PeriodicSite: Al (5.4298, 5.1611, 4.7760) [0.6822, 0.6485, 0.7500]
-PeriodicSite: N (4.6505, 5.8173, -0.0005) [0.5843, 0.7309, -0.0001]
-PeriodicSite: N (4.6505, 5.8173, 3.1845) [0.5843, 0.7309, 0.5001]
-PeriodicSite: N (3.3085, 2.1417, -0.0005) [0.4157, 0.2691, -0.0001]
-PeriodicSite: N (3.3085, 2.1417, 3.1845) [0.4157, 0.2691, 0.5001]
-PeriodicSite: N (2.1505, 4.6489, 1.5920) [0.2702, 0.5841, 0.2500]
-PeriodicSite: N (2.1522, 4.6510, 4.7760) [0.2704, 0.5844, 0.7500]
-PeriodicSite: N (5.8085, 3.3101, 1.5920) [0.7298, 0.4159, 0.2500]
-PeriodicSite: N (5.8068, 3.3080, 4.7760) [0.7296, 0.4156, 0.7500]
-PeriodicSite: O (2.0097, 7.0596, -0.0005) [0.2525, 0.8870, -0.0001]
-PeriodicSite: O (2.0097, 7.0596, 3.1845) [0.2525, 0.8870, 0.5001]
-PeriodicSite: O (5.9493, 0.8994, -0.0005) [0.7475, 0.1130, -0.0001]
-PeriodicSite: O (5.9493, 0.8994, 3.1845) [0.7475, 0.1130, 0.5001]
-PeriodicSite: O (0.8978, 2.0143, 1.5920) [0.1128, 0.2531, 0.2500]
-PeriodicSite: O (0.8972, 2.0175, 4.7760) [0.1127, 0.2535, 0.7500]
-PeriodicSite: O (7.0612, 5.9447, 1.5920) [0.8872, 0.7469, 0.2500]
-PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
+PeriodicSite: Eu (3.98, 0.0, 1.592) [0.5, 0.0, 0.25]
+PeriodicSite: Sr (3.98, 0.0, 4.776) [0.5, 0.0, 0.75]
+PeriodicSite: Sr (-4.418e-16, 3.98, 0.0007572) [-5.551e-17, 0.5, 0.0001189]
+PeriodicSite: Sr (-4.418e-16, 3.98, 3.183) [-5.551e-17, 0.5, 0.4999]
+PeriodicSite: Li (1.014, 6.569, 1.592) [0.1274, 0.8254, 0.25]
+PeriodicSite: Li (1.011, 6.566, 4.776) [0.127, 0.825, 0.75]
+PeriodicSite: Li (6.945, 1.39, 1.592) [0.8726, 0.1746, 0.25]
+PeriodicSite: Li (6.948, 1.393, 4.776) [0.873, 0.175, 0.75]
+PeriodicSite: Li (1.393, 1.013, 0.00183) [0.175, 0.1273, 0.0002874]
+PeriodicSite: Li (1.393, 1.013, 3.182) [0.175, 0.1273, 0.4997]
+PeriodicSite: Li (6.566, 6.946, 0.00183) [0.825, 0.8727, 0.0002874]
+PeriodicSite: Li (6.566, 6.946, 3.182) [0.825, 0.8727, 0.4997]
+PeriodicSite: Al (2.799, 5.431, 0.001356) [0.3517, 0.6824, 0.0002129]
+PeriodicSite: Al (2.799, 5.431, 3.183) [0.3517, 0.6824, 0.4998]
+PeriodicSite: Al (5.16, 2.528, 0.001356) [0.6483, 0.3176, 0.0002129]
+PeriodicSite: Al (5.16, 2.528, 3.183) [0.6483, 0.3176, 0.4998]
+PeriodicSite: Al (2.529, 2.794, 1.592) [0.3178, 0.3511, 0.25]
+PeriodicSite: Al (2.529, 2.798, 4.776) [0.3178, 0.3515, 0.75]
+PeriodicSite: Al (5.43, 5.165, 1.592) [0.6822, 0.6489, 0.25]
+PeriodicSite: Al (5.43, 5.161, 4.776) [0.6822, 0.6485, 0.75]
+PeriodicSite: N (4.65, 5.817, -0.0004571) [0.5843, 0.7309, -7.179e-05]
+PeriodicSite: N (4.65, 5.817, 3.184) [0.5843, 0.7309, 0.5001]
+PeriodicSite: N (3.309, 2.142, -0.0004571) [0.4157, 0.2691, -7.179e-05]
+PeriodicSite: N (3.309, 2.142, 3.184) [0.4157, 0.2691, 0.5001]
+PeriodicSite: N (2.15, 4.649, 1.592) [0.2702, 0.5841, 0.25]
+PeriodicSite: N (2.152, 4.651, 4.776) [0.2704, 0.5844, 0.75]
+PeriodicSite: N (5.809, 3.31, 1.592) [0.7298, 0.4159, 0.25]
+PeriodicSite: N (5.807, 3.308, 4.776) [0.7296, 0.4156, 0.75]
+PeriodicSite: O (2.01, 7.06, -0.0005264) [0.2525, 0.887, -8.266e-05]
+PeriodicSite: O (2.01, 7.06, 3.185) [0.2525, 0.887, 0.5001]
+PeriodicSite: O (5.949, 0.8994, -0.0005264) [0.7475, 0.113, -8.266e-05]
+PeriodicSite: O (5.949, 0.8994, 3.185) [0.7475, 0.113, 0.5001]
+PeriodicSite: O (0.8978, 2.014, 1.592) [0.1128, 0.2531, 0.25]
+PeriodicSite: O (0.8972, 2.018, 4.776) [0.1127, 0.2535, 0.75]
+PeriodicSite: O (7.061, 5.945, 1.592) [0.8872, 0.7469, 0.25]
+PeriodicSite: O (7.062, 5.941, 4.776) [0.8873, 0.7465, 0.75]
 </pre></div>
 </div>
 </div>
@@ -1009,7 +992,7 @@ PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f0adf0cf6fc95265b4f7e1de302205f96c636381ca50fd56d86af24d0db01099.png" src="../_images/f0adf0cf6fc95265b4f7e1de302205f96c636381ca50fd56d86af24d0db01099.png" />
+<img alt="../_images/13262ed0589b64a968edb02dc568e7802fbacd783125ebd35c666c0a81575bef.png" src="../_images/13262ed0589b64a968edb02dc568e7802fbacd783125ebd35c666c0a81575bef.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1019,7 +1002,7 @@ PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1333984417c5b54bdb5ba5d00dd4a6679112c69c19dcfc6e59018ecf09a43886.png" src="../_images/1333984417c5b54bdb5ba5d00dd4a6679112c69c19dcfc6e59018ecf09a43886.png" />
+<img alt="../_images/3a18866dc9122f2cf7c7d446814d842f1df093e30d19e293ffbfe91ee4abaf86.png" src="../_images/3a18866dc9122f2cf7c7d446814d842f1df093e30d19e293ffbfe91ee4abaf86.png" />
 </div>
 </div>
 <p>In order to visualize these displacements on a VESTA structure, you can follow these steps. (1) create a cif file with the ground state structure. (2) Open the structure with VESTA software and save it in a .vesta format (this should be done mannualy). (3) Use <code class="docutils literal notranslate"><span class="pre">draw_displacements_vesta()</span></code> method.</p>
@@ -1027,6 +1010,11 @@ PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">structure_gs</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;gs_stru.cif&quot;</span><span class="p">)</span>
 <span class="c1"># then open this cif with vesta, save it as .vesta file format</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;# generated using pymatgen\ndata_Sr3Li8EuAl8(NO)8\n_symmetry_space_group_name_H-M   &#39;P 1&#39;\n_cell_length_a   7.95900000\n_cell_length_b   7.95900000\n_cell_length_c   6.36800000\n_cell_angle_alpha   90.00000000\n_cell_angle_beta   90.00000000\n_cell_angle_gamma   90.00000000\n_symmetry_Int_Tables_number   1\n_chemical_formula_structural   Sr3Li8EuAl8(NO)8\n_chemical_formula_sum   &#39;Sr3 Li8 Eu1 Al8 N8 O8&#39;\n_cell_volume   403.38529663\n_cell_formula_units_Z   1\nloop_\n _symmetry_equiv_pos_site_id\n _symmetry_equiv_pos_as_xyz\n  1  &#39;x, y, z&#39;\nloop_\n _atom_site_type_symbol\n _atom_site_label\n _atom_site_symmetry_multiplicity\n _atom_site_fract_x\n _atom_site_fract_y\n _atom_site_fract_z\n _atom_site_occupancy\n  Eu  Eu0  1  0.50000000  0.00000000  0.25000000  1\n  Sr  Sr1  1  0.50000000  0.00000000  0.75000000  1\n  Sr  Sr2  1  -0.00000000  0.50000000  0.00011891  1\n  Sr  Sr3  1  -0.00000000  0.50000000  0.49988109  1\n  Li  Li4  1  0.12744375  0.82536213  0.25000000  1\n  Li  Li5  1  0.12704639  0.82502282  0.75000000  1\n  Li  Li6  1  0.87255625  0.17463787  0.25000000  1\n  Li  Li7  1  0.87295361  0.17497718  0.75000000  1\n  Li  Li8  1  0.17499170  0.12728967  0.00028740  1\n  Li  Li9  1  0.17499170  0.12728967  0.49971260  1\n  Li  Li10  1  0.82500830  0.87271033  0.00028740  1\n  Li  Li11  1  0.82500830  0.87271033  0.49971260  1\n  Al  Al12  1  0.35173807  0.68241996  0.00021289  1\n  Al  Al13  1  0.35173807  0.68241996  0.49978711  1\n  Al  Al14  1  0.64826193  0.31758004  0.00021289  1\n  Al  Al15  1  0.64826193  0.31758004  0.49978711  1\n  Al  Al16  1  0.31780577  0.35109081  0.25000000  1\n  Al  Al17  1  0.31777456  0.35154217  0.75000000  1\n  Al  Al18  1  0.68219423  0.64890919  0.25000000  1\n  Al  Al19  1  0.68222544  0.64845783  0.75000000  1\n  N  N20  1  0.58430477  0.73091011  -0.00007179  1\n  N  N21  1  0.58430477  0.73091011  0.50007179  1\n  N  N22  1  0.41569523  0.26908989  -0.00007179  1\n  N  N23  1  0.41569523  0.26908989  0.50007179  1\n  N  N24  1  0.27019713  0.58410219  0.25000000  1\n  N  N25  1  0.27041286  0.58437089  0.75000000  1\n  N  N26  1  0.72980287  0.41589781  0.25000000  1\n  N  N27  1  0.72958714  0.41562911  0.75000000  1\n  O  O28  1  0.25250920  0.88699606  -0.00008266  1\n  O  O29  1  0.25250920  0.88699606  0.50008266  1\n  O  O30  1  0.74749080  0.11300394  -0.00008266  1\n  O  O31  1  0.74749080  0.11300394  0.50008266  1\n  O  O32  1  0.11279815  0.25309031  0.25000000  1\n  O  O33  1  0.11273122  0.25349138  0.75000000  1\n  O  O34  1  0.88720185  0.74690969  0.25000000  1\n  O  O35  1  0.88726878  0.74650862  0.75000000  1\n&quot;
 </pre></div>
 </div>
 </div>
@@ -1039,7 +1027,7 @@ PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vesta files created and stored in : 
- /Users/jbouquiaux/git/lumi_book/lumi_book/lumi/VESTA_FILES
+ /Users/jbouquiaux/softwares/lumi_book/lumi_book/lumi/VESTA_FILES
 </pre></div>
 </div>
 </div>
@@ -1056,12 +1044,12 @@ PeriodicSite: O (7.0618, 5.9415, 4.7760) [0.8873, 0.7465, 0.7500]
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method draw_displacements_vesta in module abipy.lumi.deltaSCF:
 
-draw_displacements_vesta(in_path, mass_weighted=False, scale_vector=20, width_vector=0.3, color_vector=[255, 0, 0], centered=True, factor_keep_vectors=0.1, out_path=&#39;VESTA_FILES&#39;, out_filename=&#39;gs_ex_relaxation&#39;) method of abipy.lumi.deltaSCF.DeltaSCF instance
-    Draw the ground state to excited state atomic relaxation on a vesta structure. 
+draw_displacements_vesta(in_path, mass_weighted=False, scale_vector=20, width_vector=0.3, color_vector=(255, 0, 0), centered=True, factor_keep_vectors=0.1, out_path=&#39;VESTA_FILES&#39;, out_filename=&#39;gs_ex_relaxation&#39;) method of abipy.lumi.deltaSCF.DeltaSCF instance
+    Draw the ground state to excited state atomic relaxation on a vesta structure.
     
     Args:
-        in_path : path where the initial .vesta structure in stored, should correspond to the ground state relaxed structure. 
-        mass_weighted : If True, weight the displacements by the atomic masses. Draw the \Delta Q in that case.  
+        in_path : path where the initial .vesta structure in stored, should correspond to the ground state relaxed structure.
+        mass_weighted : If True, weight the displacements by the atomic masses. Draw the \Delta Q in that case.
         scale_vector : scaling factor of the vector modulus
         width_vector : vector width
         color_vector : color in rgb format
@@ -1083,7 +1071,7 @@ draw_displacements_vesta(in_path, mass_weighted=False, scale_vector=20, width_ve
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6b2d8dc9a32e9fbc3482b5c321b5676ab73d1375e3fcc834ecb796756e913e0a.png" src="../_images/6b2d8dc9a32e9fbc3482b5c321b5676ab73d1375e3fcc834ecb796756e913e0a.png" />
+<img alt="../_images/41ea771d51b073a26eecb960079979a98e954db04c58c6954bbe2be8730e587a.png" src="../_images/41ea771d51b073a26eecb960079979a98e954db04c58c6954bbe2be8730e587a.png" />
 </div>
 </div>
 <p>Or get a dataframe (or dictionnary) with the main 1D-CCM parameters.</p>
@@ -1156,11 +1144,12 @@ draw_displacements_vesta(in_path, mass_weighted=False, scale_vector=20, width_ve
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6e7ed7f244787e4d7b293f89aa2c0a9426fe59b3675dc00a35d66955fbcb5098.png" src="../_images/6e7ed7f244787e4d7b293f89aa2c0a9426fe59b3675dc00a35d66955fbcb5098.png" />
+<img alt="../_images/266216f505638ceb0a7e99df2c127dba6ceb93fedf217a4b39fb36b99422fe40.png" src="../_images/266216f505638ceb0a7e99df2c127dba6ceb93fedf217a4b39fb36b99422fe40.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method plot_lineshape_1D_zero_temp in module abipy.lumi.deltaSCF:
 
-plot_lineshape_1D_zero_temp(energy_range=[0.5, 5], max_m=25, phonon_width=0.01, with_omega_cube=&#39;True&#39;, normalized=&#39;Area&#39;, ax=None, **kwargs) method of abipy.lumi.deltaSCF.DeltaSCF instance
+plot_lineshape_1D_zero_temp(energy_range=[0.5, 5], max_m=25, phonon_width=0.01, with_omega_cube=&#39;True&#39;, normalized=&#39;Area&#39;, ax=None, **kwargs) -&gt; &#39;Figure&#39; method of abipy.lumi.deltaSCF.DeltaSCF instance
     Plot the the emission lineshape following the effective phonon 1D-CCM at T=0K.
+    NOT based on the generating function.
     
     Args:
         ax: |matplotlib-Axes| or None if a new figure should be created.
@@ -1191,6 +1180,7 @@ plot_lineshape_1D_zero_temp(energy_range=[0.5, 5], max_m=25, phonon_width=0.01, 
     ax_annotate       Add labels to  subplots e.g. (a), (b).
                       Default: False
     fig_close         Close figure. Default: False.
+    plotly            Try to convert mpl figure to plotly.
     ================  ====================================================
 </pre></div>
 </div>
@@ -1254,7 +1244,8 @@ plot_lineshape_1D_zero_temp(energy_range=[0.5, 5], max_m=25, phonon_width=0.01, 
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1314,8 +1305,8 @@ By J. Bouquiaux and the AbiPy group
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

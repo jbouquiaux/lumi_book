@@ -97,7 +97,13 @@ $$
 \Delta Q_\nu=\sum_{\kappa\alpha}\sqrt{m_\kappa}\Delta R_{\kappa\alpha}e_{\nu,\kappa\alpha}
 $$ (Delta_Q_multi)
 
-are used to compute the partial Huang-Rhys factor $S_\nu=\frac{\omega_\nu\Delta Q_\nu^2}{2\hbar}$. $e_{\nu,\kappa\alpha}$ are the phonon eigenvectors. When dealing with 3N phonons, a direct evaluation of equation {eq}`second_lum_intensity` is impractical. Instead, the so-called generating function approach is used. The lineshape function $A(\hbar\omega)$ is evaluated as the Fourier transform of the generating function $G(t)$
+are used to compute the partial Huang-Rhys factor $S_\nu=\frac{\omega_\nu\Delta Q_\nu^2}{2\hbar}$. $e_{\nu,\kappa\alpha}$ are the phonon eigenvectors. These define the Huang-Rhys spectral function:
+
+$$
+S(\hbar\omega) = \sum_{\nu}S_{\nu}\delta(\hbar\omega-\hbar\omega_{\nu}).
+$$
+
+When dealing with 3N phonons, a direct evaluation of equation {eq}`second_lum_intensity` is impractical. Instead, the so-called generating function approach is used. The lineshape function $A(\hbar\omega)$ is evaluated as the Fourier transform of the generating function $G(t)$
 
 $$
 A(\hbar\omega,T)=\int_{-\infty}^{+\infty}G(t,T)e^{i\omega t-\frac\gamma\hbar|t|-i\frac{E^\mathrm{ZPL}}\hbar t}dt,
@@ -122,22 +128,54 @@ $$
 \overline{n}_\nu(T)=\frac{1}{e^{\frac{\hbar\omega_\nu}{k_BT}}-1}.
 $$ (bose_einstein)
 
-### Semi-classical approach 
-Formula of the fwhm
+One can connect the multi-phonon modes methodology to the simpler effective phonon mode model presented in. The total normal coordinate change $\Delta Q$, due to the orthonormality of the phonon eigenvectors is linked through the partial $\Delta Q_{\nu}$ through :
 
 $$
-W(0)=S_{\mathrm{em}}\hbar\Omega_{\mathrm{g}}\sqrt{8\ln2}/\sqrt{S_{\mathrm{abs}}}.\\
+(\Delta Q)^2=\sum_{\nu}(\Delta Q_{\nu})^2,
+$$	
+and allows one to define the weight by which a mode contributes to the total atomic relaxation :
+
+$$
+p_{\nu}=(\Delta Q_{\nu}/\Delta Q)^2.
+$$
+It is then possible to define an effective frequency as
+
+$$
+\omega_{\mathrm{eff}}^2=\sum_{\nu}p_{\nu}\omega_{\nu}^2,
+$$
+and the total Huang-Rhys factor as :
+
+$$
+S=\sum_{\nu}S_{\nu}.
+$$
+
+### Semi-classical approach 
+A semi-classical formulation {cite}`henderson2006optical`, one can find formulas for the full width a half maximum of the emission shape:
+
+$$
+W(0)=S_{\mathrm{em}}\hbar\Omega_{\mathrm{g}}\sqrt{8\ln2}/\sqrt{S_{\mathrm{abs}}}.
+$$
+
+Averaging the Bose-Einstein occupations of the initial vibrational states allows one to compute the temperature dependent FWHM : 
+
+$$
 W(T)=W(0)\sqrt{\coth(\hbar\Omega_\mathrm{e}/2k_BT)},
 $$ (fwhm_semi_classical)
 
 ## Computational methodology 
-ToWrite
+
+From the above approximations, we see that the photo-luminescent lineshape of a point defect in a solid is uniquely defined by the Huang-Rhys spectral function $S(\hbar\omega)$ and the zero-phonon line. In order to compute it from first-principles, we need to obtain :  
+
+-  The zero-phonon line energy $E_{ZPL}$, which is the total energy difference between the electronic excited and ground states of the system. 
+-  The atomic relaxation associated to the change in electronic state, obtained as the difference between the relaxed atomic positions of the excited state and relaxed atomic positions of the ground state.
+-  The vibrational modes of the system. Note that in the case of the effective phonon model, this is not required since the effective mode is obtained from the atomic relaxation .  
+
+One way to obtain the first two parameters is to use DFT following the $\Delta SCF$ constrained occupation method. The vibrational modes can be obtained with finite difference or DFPT, or to use the embedding methodology (see [IFCs embedding section](ifc_emb/theory.md)) 
+
 
 ### Delta SCF constrained occupation method 
-ToWrite
-
-### Consequences of using plane-wave periodic cells DFT. 
-ToWrite
+This method refers to the use of DFT with non-Aufbau electronic occupations to mimick the electron-hole interaction. Transition energies are computed by taking the differences between total DFT energies with different occupations. 
+Note that the excited state occupations are specific to the system under study. In the case of Eu$^{2+}$, one of the seven 4f electron of the spin-up channel is promoted to the next spin-up 5d energy state.
 
 ### Forces vs Displacements, increase of supercell size.  
 For a given phonon mode $\nu$, the corresponding partial Huang-Rhys factor $S_{\nu}=\frac{\omega_{\nu}\Delta Q_{\nu}^2}{2\hbar}$ is computed thanks to the mass-weighted displacement between ground and excited states projected on this phonon mode:
@@ -178,18 +216,16 @@ name: Forces_vs_dis
 ```
 
 ### Approximations on the phonons computation :
-- size sc deltaSCF = size sc phonons bulk (use of forces or displacements)
-- size sc deltaSCF = size sc phonons with defect (use of forces or displacements)
-- size sc deltaSCF < size sc phonons bulk (use of forces, no embedding)
-- size sc deltaSCF < size sc phonons defect (use of forces, embedding)
 
-### Convergence of the Huang-Rhys spectral function
-ToWrite
+Regarding the computations of the phonons. Different options can be choosen:
 
+One must first decide if the phonons are computed with or without the defect. Then one have to choose to use the forces instead of the displacements, allowing to increase the supercell size. The four options are summarized below: 
 
-### Suggested references 
-ToWrite
+- $\Delta$SCF supercell size = bulk phonons supercell size (use of forces or displacements)
+- $\Delta$SCF supercell size = defect phonons supercell size (use of forces or displacements)
+- $\Delta$SCF supercell size < bulk phonons supercell size (use of forces, no embedding)
+- $\Delta$SCF supercell size < defect phonons supercell (use of forces, embedding)
 
-
-
-
+```{bibliography}
+:style: unsrt
+```
